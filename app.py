@@ -36,4 +36,5 @@ def stock_price():
     return jsonify({'stock_price': price})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=1000, debug=True)
+    # app.run(debug=True)
