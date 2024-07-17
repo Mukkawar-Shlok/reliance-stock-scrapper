@@ -32,16 +32,15 @@ Description:
 Returns the real-time stock price of Reliance Industries fetched from Google Finance.
 
 ```bash
-GET /reliance_stock_history/<period>/<interval>
+GET /reliance_stock_history/<interval>/<from_date>/<to_date>   
 ```
+Date should be in format %Y-%m-%d.
+
 Description:
 Returns historical stock data for Reliance Industries based on the specified period and interval.
 
-## Valid Period Values:
-1d, 5d
-1mo, 3mo, 6mo, 1y, 2y, 5y, 10y
 
-##Valid Interval Values:
+## Valid Interval Values:
 1m, 2m, 5m, 15m, 30m, 60m, 90m, 1h
 1d, 5d
 1wk, 1mo, 3mo

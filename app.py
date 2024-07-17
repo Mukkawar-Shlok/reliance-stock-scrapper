@@ -36,17 +36,22 @@ def stock_price():
     return jsonify({'stock_price': price})
 
 
-@app.route('/reliance_stock_history/<period>/<interval>', methods=['GET'])
-def get_reliance_stock_history(period, interval):
+@app.route('/reliance_stock_history/<interval>/<from_date>/<to_date>', methods=['GET'])
+def get_reliance_stock_history(interval,from_date,to_date):
     try:
+        
+        # from_date = "2024-01-1"
+        # to_date = "2024-05-28"
+        
         # Define the stock ticker symbol for Reliance Industries
         ticker_symbol = 'RELIANCE.NS'
         
         # Fetch the stock data using yfinance
         reliance_stock = yf.Ticker(ticker_symbol)
         
-        # Get historical market data
-        historical_data = reliance_stock.history(period=period, interval=interval)
+        # If from and to dates are provided, fetch data for the date range
+        if from_date and to_date:
+            historical_data = reliance_stock.history(start=from_date, end=to_date, interval=interval)
         
         # Reset the index to make the date a column
         historical_data.reset_index(inplace=True)
@@ -59,6 +64,7 @@ def get_reliance_stock_history(period, interval):
     except Exception as e:
         # Return an error message
         return jsonify({"message": str(e)}), 400
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=1000, debug=True)
     # app.run(debug=True)
